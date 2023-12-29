@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../gitprompt"
+		}
+	],
+	"settings": {
+		"C_Cpp.default.compileCommands": "./mygitprompt/builddir/compile_commands.json"
+	}
+}
