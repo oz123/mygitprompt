@@ -1,12 +1,18 @@
 
+BIN = mygitprompt
+WORKDIR = $(shell pwd)/builddir
+
 build:
-	meson  compile -C build
+	meson  compile -C $(WORKDIR)
 
 init:
-	meson setup build/ -Doptimization=3
+	meson setup $(WORKDIR) -Doptimization=3
 
 clean:
-	meson setup --wipe build
+	meson setup --wipe $(WORKDIR)
 
 clean-all:
-	rm -rf build
+	rm -rf $(WORKDIR)
+
+run:
+	$(WORKDIR)/$(BIN)
