@@ -10,7 +10,7 @@ int main() {
     size_t len = 0;
     size_t read;
 
-    fp = popen("git status", "r");
+    fp = popen("git status --porcelain=v1 --branch -z", "r");
     if (fp == NULL) {
         printf("Failed to run command\n" );
         return 1;
