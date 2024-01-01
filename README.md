@@ -49,7 +49,25 @@ We want the prompt to output something like this:
 ```
 We need some data structure to count the different status, and store the parsed output using that structure.
 
-This can also be a prompt with the number of commits ahead or behind:
+Now that we added the data structure and we do a reasonable job parsing the file status. But what about counting our
+commits a head?
+```
+ [±|main ↑1 U:3 ?:4 ✗|] 
+```
+This is produced from the following:
+```
+$ git status --branch --porcelain=v1
+## main...origin/main [ahead 1]
+ M .vscode/tasks.json
+ M mygitprompt.c
+ M mygitprompt.code-workspace
+?? .vscode/settings.json
+?? bar
+?? foo
+?? mygitprompt
+```
+
+This can also be a prompt with the number of commits behind:
 
 ```
 [±|main ↓1 U:1 ?:5 ✗|] 
@@ -63,7 +81,7 @@ This can also be a prompt with the number of commits ahead or behind:
  ?? mygitprompt
 ```
 
-Or it could be a prompt like this:
+Or it could be a prompt like this, with both added or behind:
 [±|main ↑1 ↓1 ?:5 ✗|]
 ```
  git status --porcelain=v1 --branch 
