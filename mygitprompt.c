@@ -9,7 +9,7 @@
 
 typedef struct gitstatus {
     char *branch_name;
-    int added_count;
+    int staged_count;
     int modified_count;
     int deleted_count;
     int untracked_count;
@@ -89,8 +89,25 @@ int main(void) {
         parse_branch_name(line, gs);
     }
 
+    char filestatus[3];
+    // https://git-scm.com/docs/git-status
     while (getline(&line, &len, fp) != -1) {
-        printf("%s", line);
+        snprintf(filestatus, sizeof(filestatus), "%s", line);
+        if (strcmp(filestatus, "??") == 0) {
+            gs->untracked_count+=1;
+        } else if (strcmp(filestatus, " M") == 0) {
+            gs->modified_count+=1;
+        } else if (strcmp(filestatus, " D") == 0) {
+            gs->modified_count+=1;
+        } else if (strcmp(filestatus, "MM") == 0) {
+            gs->staged_count+=1;
+            gs->modified_count+=1;
+        } else if (strcmp(filestatus, "D ") == 0) {
+            gs->modified_count+=1;
+        } else if (strcmp(filestatus, "M ") == 0) {
+            gs->modified_count+=1;
+        }
+
     }
 
     pclose(fp);
@@ -98,6 +115,11 @@ int main(void) {
         free(line);
 
     printf("Branch Name: %s\n", gs->branch_name);
+    printf("Untracked: %d\n", gs->untracked_count);
+    printf("Modified: %d\n", gs->modified_count);
+    printf("Staged: %d\n", gs->staged_count);
+    printf("Deleted: %d\n", gs->deleted_count);
+
     free_gitstatus(gs);
     return 0;
 }
