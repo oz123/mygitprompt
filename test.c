@@ -18,14 +18,17 @@ int main(void) {
 
     parse_branch_name(line1, gs);
     parse_ahead_behind(line1, gs);
-    //printf("Branch: %s, Ahead: %d, Behind: %d\n", gs->branch_name, gs->ahead_count, gs->behind_count);
-
+    printf("Branch: %s, Ahead: %d, Behind: %d\n", gs->branch_name, gs->ahead_count, gs->behind_count);
+    gs->ahead_count=0;
+    gs->behind_count=0;
     parse_ahead_behind(line2, gs);
-   // printf("Branch: %s, Ahead: %d, Behind: %d\n", gs->branch_name, gs->ahead_count, gs->behind_count);
-
+    printf("Branch: %s, Ahead: %d, Behind: %d\n", gs->branch_name, gs->ahead_count, gs->behind_count);
+    gs->ahead_count=0;
+    gs->behind_count=0;
     parse_ahead_behind(line3, gs);
-   // printf("Branch: %s, Ahead: %d, Behind: %d\n", gs->branch_name, gs->ahead_count, gs->behind_count);
-
+    printf("Branch: %s, Ahead: %d, Behind: %d\n", gs->branch_name, gs->ahead_count, gs->behind_count);
+    gs->ahead_count=0;
+    gs->behind_count=0;
     parse_ahead_behind(line4, gs);
     printf("Branch: %s, Ahead: %d, Behind: %d\n", gs->branch_name, gs->ahead_count, gs->behind_count);
     free_gitstatus(gs);
