@@ -48,3 +48,17 @@ We want the prompt to output something like this:
 [±|main S:2 U:3 ?:3 ✗|]
 ```
 We need some data structure to count the different status, and store the parsed output using that structure.
+
+This can also be a prompt with the number of commits ahead or behind:
+
+```
+[±|main ↓1 U:1 ?:5 ✗|] 
+
+## main...origin/main [behind 1]
+ M README.md
+ ?? .README.md.swp
+ ?? .vscode/settings.json
+ ?? bar
+ ?? foo
+ ?? mygitprompt
+```
