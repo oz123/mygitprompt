@@ -15,6 +15,11 @@ typedef struct gitstatus {
     int untracked_count;
 } GitStatus;
 
+// on why we use 
+// typedef struct <Tag>{
+    // fields
+// } NameOfStruct
+// https://stackoverflow.com/a/20532390/492620
 
 GitStatus* new_gitstatus(void) {
    GitStatus *gs = malloc(sizeof(GitStatus));
