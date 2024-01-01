@@ -16,3 +16,9 @@ clean-all:
 
 run:
 	$(WORKDIR)/$(BIN)
+
+build-test:
+	gcc -o builddir/test.exe test.c gitstatus.c -I.
+
+test: build-test
+	MALLOC_PERTURB_=126 ./builddir/test.exe
