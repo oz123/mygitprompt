@@ -13,6 +13,8 @@ typedef struct gitstatus {
     int modified_count;
     int deleted_count;
     int untracked_count;
+    int ahead_count;
+    int behind_count;
 } GitStatus;
 
 // on why we use 
@@ -36,6 +38,10 @@ void free_gitstatus(GitStatus* gs) {
      free(gs->branch_name); // Free the memory pointed to by branch_name
      free(gs); // Then free the struct itself
   }
+}
+
+void parse_ahead_behid(char *line, GitStatus *gs) {
+
 }
 
 void parse_branch_name(char *line, GitStatus *gs) {
