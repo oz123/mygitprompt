@@ -62,3 +62,15 @@ This can also be a prompt with the number of commits ahead or behind:
  ?? foo
  ?? mygitprompt
 ```
+
+Or it could be a prompt like this:
+[±|main ↑1 ↓1 ?:5 ✗|]
+```
+ git status --porcelain=v1 --branch 
+## main...origin/main [ahead 1, behind 1]
+ ?? .README.md.swp
+ ?? .vscode/settings.json
+ ?? bar
+ ?? foo
+ ?? mygitprompt
+```
