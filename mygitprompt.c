@@ -14,7 +14,7 @@ int main(void) {
     size_t len = 0;
     GitStatus *gs = NULL;
 
-    fp = popen("git status --porcelain=v1 --branch", "r");
+    fp = popen("git status --porcelain=v1 --branch 2>&1", "r");
     if (fp == NULL) {
         printf("Failed to run command\n" );
         return 1;
@@ -53,16 +53,17 @@ int main(void) {
 
     }
 
-    pclose(fp);
+    int status = pclose(fp);
     if (line)
         free(line);
+    if (status == 0){
+        printf("Branch Name: %s\n", gs->branch_name);
+        printf("Untracked: %d\n", gs->untracked_count);
+        printf("Modified: %d\n", gs->modified_count);
+        printf("Staged: %d\n", gs->staged_count);
+        printf("Deleted: %d\n", gs->deleted_count);
 
-    printf("Branch Name: %s\n", gs->branch_name);
-    printf("Untracked: %d\n", gs->untracked_count);
-    printf("Modified: %d\n", gs->modified_count);
-    printf("Staged: %d\n", gs->staged_count);
-    printf("Deleted: %d\n", gs->deleted_count);
-
+    }
     free_gitstatus(gs);
     return 0;
 }

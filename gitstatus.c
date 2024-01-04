@@ -64,7 +64,7 @@ void parse_branch_name(char *line, GitStatus *gs) {
 
         // Ensure the branch string is null-terminated
         gs->branch_name[len] = '\0';
-    } else {
-        printf("Dot not found in the string\n");
-    }
+    }// else {
+        //printf("Dot not found in the string\n");
+    //}
 }
