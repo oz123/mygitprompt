@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "gitstatus.h"
+#include "config.h"
 
 int main(void) {
     FILE *fp;
@@ -49,6 +50,13 @@ int main(void) {
             gs->modified_count+=1;
         } else if (strcmp(filestatus, "M ") == 0) {
             gs->modified_count+=1;
+        } else if (strcmp(filestatus, "A ") == 0) {
+            gs->staged_count+=1;
+        } else if (strcmp(filestatus, "AM") == 0) {
+            gs->staged_count+=1;
+            gs->modified_count+=1;
+        } else if (strcmp(filestatus, "??") == 0) {
+            gs->untracked_count+=1;
         }
 
     }
@@ -57,12 +65,7 @@ int main(void) {
     if (line)
         free(line);
     if (status == 0){
-        printf("Branch Name: %s\n", gs->branch_name);
-        printf("Untracked: %d\n", gs->untracked_count);
-        printf("Modified: %d\n", gs->modified_count);
-        printf("Staged: %d\n", gs->staged_count);
-        printf("Deleted: %d\n", gs->deleted_count);
-
+        show_prompt(gs);
     }
     free_gitstatus(gs);
     return 0;
