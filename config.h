@@ -6,6 +6,7 @@
 #define CONFIG_H
 #include <stdbool.h>
 #include "gitstatus.h"
+#include "colors.h"
 
 #define GITICON "±"
 #define GITCLEAN "✓"
@@ -26,7 +27,7 @@ void show_prompt(GitStatus *gs){
 
 void show_prompt(GitStatus *gs) {
   bool dirty = false;
-  printf(GITICON " %s ", gs->branch_name);
+  printf(FG_GREEN GITICON RESET_ALL FG_WHITE"|%s ", gs->branch_name);
   if (gs->staged_count > 0) {
     printf(STAGED ":%d ", gs->staged_count);
     dirty = true;
@@ -40,9 +41,9 @@ void show_prompt(GitStatus *gs) {
     dirty = true;
   }
   if (dirty) {
-    printf(GITDIRTY);
+    printf(FG_RED GITDIRTY FG_WHITE"|");
   } else {
-    printf(GITCLEAN);
+    printf(FG_GREEN GITCLEAN FG_WHITE"|");
   }
 }
 #endif // CONFIG_H
