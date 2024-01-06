@@ -8,7 +8,7 @@ sources = ['mygitprompt.c', 'gitstatus.c']
 inc = include_directories('.')
 
 # Define the main executable
-executable('mygitprompt', sources, include_directories: inc)
+executable('mygitprompt', sources, include_directories: inc, install: true)
 
 e = executable('mytest', sources: ['test.c', 'gitstatus.c'])
 test('mygitprompt test', e)
