@@ -48,7 +48,12 @@ int main(void) {
             gs->modified_count+=1;
         } else if (strcmp(filestatus, "D ") == 0) {
             gs->modified_count+=1;
+        } else if (strcmp(filestatus, "RD") == 0) {
+            gs->modified_count+=1;
+            gs->staged_count+=1;
         } else if (strcmp(filestatus, "M ") == 0) {
+            gs->modified_count+=1;
+        } else if (strcmp(filestatus, "R ") == 0) {
             gs->modified_count+=1;
         } else if (strcmp(filestatus, "A ") == 0) {
             gs->staged_count+=1;
