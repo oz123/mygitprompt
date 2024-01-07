@@ -41,7 +41,7 @@ void show_prompt(GitStatus *gs) {
     dirty = true;
   }
   if (dirty) {
-    printf(FG_RED GITDIRTY FG_WHITE"|");
+    printf(FG_RED BOLD GITDIRTY FG_WHITE"|");
   } else {
     printf(FG_GREEN GITCLEAN FG_WHITE"|");
   }
