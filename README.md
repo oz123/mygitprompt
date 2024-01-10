@@ -92,3 +92,8 @@ Or it could be a prompt like this, with both added or behind:
  ?? foo
  ?? mygitprompt
 ```
+
+TODO: we still need to handle commits ahead or behind in the default theme.
+```
+[±|two-node → mine ↑6 ✓|]
+```
