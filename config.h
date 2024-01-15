@@ -25,6 +25,8 @@ void show_prompt(GitStatus *gs){
 }
 */
 
+// TODO: add gs->ahead_count and gs->behind_count
+// TODO: Handle tags
 void show_prompt(GitStatus *gs) {
   bool dirty = false;
   printf(FG_GREEN GITICON RESET_ALL FG_WHITE"|%s ", gs->branch_name);

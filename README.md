@@ -97,3 +97,23 @@ TODO: we still need to handle commits ahead or behind in the default theme.
 ```
 [±|two-node → mine ↑6 ✓|]
 ```
+
+Handle tags:
+```
+[±|tag:v1.0.8 ✓|] $ 
+```
+
+If there is no branche: 
+
+```
+git status --porcelain=v1 --branch 
+## HEAD (no branch)
+```
+Try and find tags:
+
+```
+$ git describe --tags --exact-match 
+v1.0.8
+```
+
+
