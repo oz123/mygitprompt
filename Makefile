@@ -6,7 +6,7 @@ build:
 	meson  compile -C $(WORKDIR)
 
 init:
-	meson setup $(WORKDIR) -Doptimization=3
+	meson setup $(WORKDIR) -Doptimization=3 -Dwarning_level=3
 
 clean:
 	meson setup --wipe $(WORKDIR)
