@@ -1,3 +1,4 @@
+#define _GNU_SOURCE
 #include "gitstatus.h"
 #include <stdio.h>
 #include <string.h>
@@ -67,4 +68,28 @@ void parse_branch_name(char *line, GitStatus *gs) {
     }// else {
         //printf("Dot not found in the string\n");
     //}
+}
+
+int parse_stash_count(GitStatus *gs) {
+    FILE *fp;
+    char *line = NULL;
+    size_t len = 0;
+
+    gs->stash_count = 0;
+
+    fp = popen("git rev-list --walk-reflogs --count refs/stash  2>&1", "r");
+
+    if (fp == NULL) {
+        printf("Failed to run command\n" );
+        return 1;
+    }
+
+    if (getline(&line, &len, fp) != -1) {
+        gs->stash_count = atoi(line);
+    } else {
+	gs->stash_count = 0;
+        //printf("Failed to parse stash count\n" );
+        return 1;
+    }
+    return 0;
 }

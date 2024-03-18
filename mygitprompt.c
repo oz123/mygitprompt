@@ -70,6 +70,7 @@ int main(void) {
     if (line)
         free(line);
     if (status == 0){
+        parse_stash_count(gs);
         show_prompt(gs);
     }
     free_gitstatus(gs);

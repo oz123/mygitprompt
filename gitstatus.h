@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+//
 // on why we use 
 // typedef struct <Tag>{
     // fields
@@ -12,6 +13,7 @@
 
 typedef struct gitstatus {
     char *branch_name;
+    int stash_count;
     int staged_count;
     int modified_count;
     int deleted_count;
@@ -24,5 +26,6 @@ GitStatus* new_gitstatus(void);
 void free_gitstatus(GitStatus* gs);
 void parse_branch_name(char *line, GitStatus *gs);
 void parse_ahead_behind(char *line, GitStatus *gs);
+int parse_stash_count(GitStatus *gs);
 
 #endif /* GITSTATUS_H */
