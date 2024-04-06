@@ -29,7 +29,7 @@ void show_prompt(GitStatus *gs){
 // TODO: Handle tags
 void show_prompt(GitStatus *gs) {
   bool dirty = false;
-  printf(FG_GREEN GITICON RESET_ALL FG_WHITE"|%s ", gs->branch_name);
+  printf("[" FG_GREEN GITICON RESET_ALL FG_WHITE"|%s ", gs->branch_name);
   if (gs->stash_count > 0) {
     printf(" {%d} ", gs->stash_count);
   }
@@ -50,5 +50,6 @@ void show_prompt(GitStatus *gs) {
   } else {
     printf(FG_GREEN GITCLEAN FG_WHITE"|");
   }
+  printf(RESET_ALL "] ");
 }
 #endif // CONFIG_H
