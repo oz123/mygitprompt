@@ -5,6 +5,9 @@ WORKDIR = $(shell pwd)/builddir
 build:
 	meson  compile -C $(WORKDIR)
 
+install:
+	meson  install -C $(WORKDIR)
+
 init:
 	meson setup $(WORKDIR) -Doptimization=3 -Dwarning_level=3
 
