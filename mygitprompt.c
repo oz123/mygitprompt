@@ -62,6 +62,7 @@ int main(int argc, char *argv[]){
             gs->modified_count+=1;
             gs->staged_count+=1;
         } else if (strcmp(filestatus, "M ") == 0) {
+            gs->staged_count+=1;
             gs->modified_count+=1;
         } else if (strcmp(filestatus, "R ") == 0) {
             gs->modified_count+=1;
