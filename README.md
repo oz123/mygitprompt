@@ -115,5 +115,3 @@ Try and find tags:
 $ git describe --tags --exact-match 
 v1.0.8
 ```
-
-

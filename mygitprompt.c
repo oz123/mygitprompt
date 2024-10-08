@@ -9,12 +9,22 @@
 #include "gitstatus.h"
 #include "config.h"
 
-int main(void) {
+int main(int argc, char *argv[]){
     FILE *fp;
     char *line = NULL;
     size_t len = 0;
     GitStatus *gs = NULL;
+    char *cmd = NULL;
 
+    if (argc > 1) {
+        cmd = argv[1];
+	if (!strcmp(cmd, "version")){
+            printf("mygitprompt version %s\n", VERSION);
+        } else {
+            printf("Unknown command ...\n");
+            return 1;
+	}
+    }
     fp = popen("git status --porcelain=v1 --branch 2>&1", "r");
     if (fp == NULL) {
         printf("Failed to run command\n" );
