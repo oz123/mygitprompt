@@ -3,14 +3,13 @@
 
 // bash colors
 // see man 4 console_codes
-#define BOLD "\\[\x1b[1m\\]"
+#define BOLD "\033[1m"
 
-#define RESET_ALL "\\[\x1b[0m\\]"
+#define RESET_ALL "\033[0m"
 
-#define FG_RED "\\[\x1b[31m\\]"
-#define FG_GREEN "\\[\x1b[32m\\]"
-#define FG_WHITE "\\[\x1b[37m\\]"
-#define NORMAL "\\[\\e[0m\\]"
+#define FG_RED "\033[31m"
+#define FG_GREEN "\033[32m"
+#define FG_WHITE "\033[97m"
 
 #endif
 
