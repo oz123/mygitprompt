@@ -9,14 +9,30 @@ GitStatus* new_gitstatus(void) {
    if (gs == NULL) {
       return NULL; 
    }
+
+   gs->branch_name = NULL;
+   gs->remote_name = NULL;
+   gs->stash_count = 0;
+   gs->staged_count = 0;
+   gs->modified_count = 0;
+   gs->deleted_count = 0;
+   gs->untracked_count = 0;
+   gs->ahead_count = 0;
+   gs->behind_count = 0;
    return gs;
 }
 
 void free_gitstatus(GitStatus* gs) {
   if (gs != NULL) {
-     free(gs->branch_name); // Free the memory pointed to by branch_name
-     free(gs->remote_name); // Free the memory pointed to by branch_name
-     free(gs); // Then free the struct itself
+      if (gs->branch_name != NULL) {
+         free(gs->branch_name); // Free the memory pointed to by branch_name
+         gs->branch_name = NULL;
+      }
+      if (gs->remote_name) {
+         free(gs->remote_name); // Free the memory pointed to by remote_name
+         gs->remote_name = NULL;
+      }
+      free(gs); // Then free the struct itself
   }
 }
 
@@ -136,5 +152,8 @@ char* extract_between(char *line, const char *start_marker, const char *end_mark
 }
 
 void parse_remote_name(char *line, GitStatus *gs) {
-    gs->remote_name = extract_between(line, "...", "/");
+    char *value = extract_between(line, "...", "/");
+    if (value != NULL) {
+        gs->remote_name = extract_between(line, "...", "/");
+    }
 }
