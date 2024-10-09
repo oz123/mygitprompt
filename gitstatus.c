@@ -36,6 +36,12 @@ void parse_ahead_behind(char *line, GitStatus *gs) {
         sscanf(p, ", behind %d", &behind);
         gs->behind_count = behind;
     }
+    // Find the first occurrence of [behind n] in the string
+    p = strstr(line, "[behind ");
+    if (p) {
+        sscanf(p, "[behind %d", &behind);
+        gs->behind_count = behind;
+    }
 }
 
 void parse_branch_name(char *line, GitStatus *gs) {

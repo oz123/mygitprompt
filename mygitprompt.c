@@ -38,9 +38,10 @@ int main(int argc, char *argv[]){
        exit(EXIT_FAILURE);
     }
 
-    // first line is always the branch name
+    // first line has always the branch name and ahead behing
     if (getline(&line, &len, fp) != -1) {
         parse_branch_name(line, gs);
+        parse_ahead_behind(line, gs);
     }
 
     char filestatus[3];
