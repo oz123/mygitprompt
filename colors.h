@@ -6,17 +6,19 @@
 // see man 7 ascii
 
 #define STX "\002"
-#define BOLD "\001\033[1m"STX
+#define SOH "\001"
+
+#define BOLD SOH"\033[1m"STX
 
 #define RESET_ALL "\033[0m"
-#define NORMAL "\001\033[0m"STX
+#define NORMAL SOH"\033[0m"STX
 
-#define FG_RED "\001\033[31m"STX
-#define FG_GREEN "\001\033[32m"STX
-#define FG_WHITE "\001\033[97m"STX
+#define FG_RED SOH"\033[31m"STX
+#define FG_GREEN SOH"\033[32m"STX
+#define FG_WHITE SOH"\033[97m"STX
 
 
-#define GREEN_COLOR "\001\033[32m"STX
-#define RESET_COLOR "\001\033[0m"STX
+#define GREEN_COLOR SOH"\033[32m"STX
+#define RESET_COLOR SOH"\033[0m"STX
 #endif
 
