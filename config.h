@@ -29,8 +29,9 @@ void show_prompt(GitStatus *gs){
 // TODO: Handle tags
 void show_prompt(GitStatus *gs) {
    bool dirty = false;
+   printf("[");
    printf(FG_GREEN GITICON FG_WHITE);
-   printf("[|%s ", gs->branch_name);
+   printf("|%s ", gs->branch_name);
    if (gs->staged_count > 0) {
        printf(STAGED ":%d ", gs->staged_count);
        dirty = true;
@@ -48,7 +49,7 @@ void show_prompt(GitStatus *gs) {
    } else {
       printf(GITCLEAN"|");
    }
-   printf("]");
    printf(RESET_COLOR);
+   printf("]");
 }
 #endif // CONFIG_H
