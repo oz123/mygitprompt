@@ -115,3 +115,13 @@ Try and find tags:
 $ git describe --tags --exact-match 
 v1.0.8
 ```
+
+Behind commits:
+```
+[±|main → origin ↓8 ?:4 ✗|] $git status --porcelain --branch 
+## main...origin/main [behind 8]
+?? TODO
+?? bla
+?? foo
+?? test.sh
+```
