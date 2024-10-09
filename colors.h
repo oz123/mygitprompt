@@ -11,13 +11,12 @@
 
 #define BOLD SOH ESC "[1m"STX
 
-#define RESET_ALL ESC "[0m"
+#define RESET_COLOR ESC "[0m"STX
 #define NORMAL SOH ESC "[0m"STX
 
 #define FG_RED SOH ESC "[31m"STX
 #define FG_GREEN SOH ESC "[32m"STX
 #define FG_WHITE SOH ESC "[97m"STX
 
-#define RESET_COLOR SOH"\033[0m"STX
 #endif
 
