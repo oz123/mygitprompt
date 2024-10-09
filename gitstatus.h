@@ -13,6 +13,7 @@
 
 typedef struct gitstatus {
     char *branch_name;
+    char *remote_name;
     int stash_count;
     int staged_count;
     int modified_count;
@@ -25,7 +26,9 @@ typedef struct gitstatus {
 GitStatus* new_gitstatus(void);
 void free_gitstatus(GitStatus* gs);
 void parse_branch_name(char *line, GitStatus *gs);
+void parse_remote_name(char *line, GitStatus *gs);
 void parse_ahead_behind(char *line, GitStatus *gs);
+char *extract_substring(char *line);
 int parse_stash_count(GitStatus *gs);
 
 #endif /* GITSTATUS_H */

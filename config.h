@@ -30,9 +30,9 @@ void show_prompt(GitStatus *gs) {
     bool dirty = false;
     printf("[");
     printf(FG_GREEN GITICON FG_WHITE);
-    printf("|%s ", gs->branch_name);
+    printf("|%s → %s", gs->branch_name, gs->remote_name);
     if (gs->ahead_count > 0) {
-        printf("↑%d", gs->ahead_count);
+        printf(" ↑%d", gs->ahead_count);
     }
     if (gs->behind_count > 0) {
         printf("↓%d", gs->behind_count);

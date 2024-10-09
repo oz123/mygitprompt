@@ -15,6 +15,7 @@ GitStatus* new_gitstatus(void) {
 void free_gitstatus(GitStatus* gs) {
   if (gs != NULL) {
      free(gs->branch_name); // Free the memory pointed to by branch_name
+     free(gs->remote_name); // Free the memory pointed to by branch_name
      free(gs); // Then free the struct itself
   }
 }
@@ -98,4 +99,36 @@ int parse_stash_count(GitStatus *gs) {
         return 1;
     }
     return 0;
+}
+
+char* extract_substring(char *line) {
+    // Find the "..." in the input string
+    const char *start = strstr(line, "...");
+    if (start != NULL) {
+        // Move pointer to the beginning of the substring after "..."
+        start += 3;
+
+        // Find the '/' in the input string after "..."
+        const char *end = strchr(start, '/');
+
+        // Calculate the length of the substring
+        if (end != NULL) {
+            size_t length = end - start;
+            char *output = (char *)malloc((length + 1) * sizeof(char)); // +1 for null terminator
+            if (output == NULL) {
+                printf("Memory allocation failed\n");
+                return NULL;
+            }
+
+            strncpy(output, start, length);
+            output[length] = '\0'; // Null-terminate the output string
+
+            return output;
+        }
+    }
+    return NULL;
+}
+
+void parse_remote_name(char *line, GitStatus *gs) {
+    gs->remote_name = extract_substring(line);
 }

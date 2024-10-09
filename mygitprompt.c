@@ -18,12 +18,12 @@ int main(int argc, char *argv[]){
 
     if (argc > 1) {
         cmd = argv[1];
-	if (!strcmp(cmd, "version")){
+    if (!strcmp(cmd, "version")){
             printf("mygitprompt version %s\n", VERSION);
         } else {
             printf("Unknown command ...\n");
             return 1;
-	}
+	      }
     }
     fp = popen("git status --porcelain=v1 --branch 2>&1", "r");
     if (fp == NULL) {
@@ -41,6 +41,7 @@ int main(int argc, char *argv[]){
     // first line has always the branch name and ahead behing
     if (getline(&line, &len, fp) != -1) {
         parse_branch_name(line, gs);
+        parse_remote_name(line, gs);
         parse_ahead_behind(line, gs);
     }
 
