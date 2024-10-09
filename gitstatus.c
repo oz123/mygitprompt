@@ -101,15 +101,21 @@ int parse_stash_count(GitStatus *gs) {
     return 0;
 }
 
-char* extract_substring(char *line) {
+/*
+   Match a string between two markers
+   given a string like 'main...origin/main'
+   calling extract_between("main...origin/main", "...", "/")
+   will return 'origin'
+*/
+char* extract_between(char *line, const char *start_marker, const char *end_marker) {
     // Find the "..." in the input string
-    const char *start = strstr(line, "...");
+    const char *start = strstr(line, start_marker);
     if (start != NULL) {
-        // Move pointer to the beginning of the substring after "..."
+        // Move pointer to the beginning of the substring after start_marker
         start += 3;
 
-        // Find the '/' in the input string after "..."
-        const char *end = strchr(start, '/');
+        // Find the end_marker in the input string after start_marker
+        const char *end = strstr(start, end_marker);
 
         // Calculate the length of the substring
         if (end != NULL) {
@@ -130,5 +136,5 @@ char* extract_substring(char *line) {
 }
 
 void parse_remote_name(char *line, GitStatus *gs) {
-    gs->remote_name = extract_substring(line);
+    gs->remote_name = extract_between(line, "...", "/");
 }

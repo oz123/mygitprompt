@@ -28,7 +28,7 @@ void free_gitstatus(GitStatus* gs);
 void parse_branch_name(char *line, GitStatus *gs);
 void parse_remote_name(char *line, GitStatus *gs);
 void parse_ahead_behind(char *line, GitStatus *gs);
-char *extract_substring(char *line);
+char *extract_between(char *line, const char *start_marker, const char *end_marker);
 int parse_stash_count(GitStatus *gs);
 
 #endif /* GITSTATUS_H */
