@@ -38,21 +38,21 @@ void show_prompt(GitStatus *gs) {
         printf("↓%d", gs->behind_count);
     }
     if (gs->staged_count > 0) {
-        printf(STAGED ":%d ", gs->staged_count);
+        printf(STAGED ":%d", gs->staged_count);
         dirty = true;
     }
     if (gs->modified_count > 0) {
-         printf(" "UNSTAGED ":%d ", gs->modified_count);
+         printf(" "UNSTAGED ":%d", gs->modified_count);
          dirty = true;
     }
     if (gs->untracked_count > 0) {
-        printf(" "UNTRACKED ":%d ", gs->untracked_count);
+        printf(" "UNTRACKED ":%d", gs->untracked_count);
         dirty = true;
     }
     if (dirty) {
-       printf(FG_RED BOLD GITDIRTY NORMAL FG_WHITE"|");
+       printf(" "FG_RED BOLD GITDIRTY NORMAL FG_WHITE"|");
     } else {
-       printf(GITCLEAN"|");
+       printf(" "GITCLEAN"|");
     }
     printf(RESET_COLOR);
     printf("]");
