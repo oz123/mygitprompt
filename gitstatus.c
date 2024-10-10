@@ -12,6 +12,7 @@ GitStatus* new_gitstatus(void) {
 
    gs->branch_name = NULL;
    gs->remote_name = NULL;
+   gs->tag_name = NULL;
    gs->stash_count = 0;
    gs->staged_count = 0;
    gs->modified_count = 0;
@@ -32,8 +33,42 @@ void free_gitstatus(GitStatus* gs) {
          free(gs->remote_name); // Free the memory pointed to by remote_name
          gs->remote_name = NULL;
       }
+      if (gs->tag_name) {
+          free(gs->tag_name);
+          gs->tag_name = NULL;
+      }
       free(gs); // Then free the struct itself
   }
+}
+
+int parse_tag_name(char *line, GitStatus *gs){
+    FILE *fp;
+    size_t len = 0;
+
+    fp = popen("git describe --tags", "r");
+    if (fp == NULL) {
+        printf("Failed to run command\n" );
+        return 1;
+    }
+
+    if (getline(&line, &len, fp) != -1) {
+       // Remove the trailing newline character
+       line[strlen(line) - 1] = '\0';
+       gs->tag_name = (char *)malloc(len);
+       if (gs->tag_name == NULL) {
+            printf("Memory allocation for tag_name failed\n");
+            return 1;
+       }
+       strncpy(gs->tag_name, line, len-1);
+    }
+    return 0;
+}
+
+bool is_tag(char *line) {
+    if (!strcmp(line, "## HEAD (no branch)\n")) {
+        return true;
+    }
+    return false;
 }
 
 void parse_ahead_behind(char *line, GitStatus *gs) {
@@ -88,9 +123,7 @@ void parse_branch_name(char *line, GitStatus *gs) {
 
         // Ensure the branch string is null-terminated
         gs->branch_name[len] = '\0';
-    }// else {
-        //printf("Dot not found in the string\n");
-    //}
+    }
 }
 
 int parse_stash_count(GitStatus *gs) {

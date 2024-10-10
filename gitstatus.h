@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <stdbool.h>
 //
 // on why we use 
 // typedef struct <Tag>{
@@ -14,6 +15,7 @@
 typedef struct gitstatus {
     char *branch_name;
     char *remote_name;
+    char *tag_name;
     int stash_count;
     int staged_count;
     int modified_count;
@@ -24,11 +26,13 @@ typedef struct gitstatus {
 } GitStatus;
 
 GitStatus* new_gitstatus(void);
+char *extract_between(char *line, const char *start_marker, const char *end_marker);
 void free_gitstatus(GitStatus* gs);
+bool is_tag(char *line);
 void parse_branch_name(char *line, GitStatus *gs);
 void parse_remote_name(char *line, GitStatus *gs);
 void parse_ahead_behind(char *line, GitStatus *gs);
-char *extract_between(char *line, const char *start_marker, const char *end_marker);
+int parse_tag_name(char *line, GitStatus *gs);
 int parse_stash_count(GitStatus *gs);
 
 #endif /* GITSTATUS_H */

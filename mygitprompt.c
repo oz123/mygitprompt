@@ -37,14 +37,18 @@ int main(int argc, char *argv[]){
        printf("Failed to allocate memory for GitStatus.\n");
        exit(EXIT_FAILURE);
     }
-
     // first line has always the branch name and ahead behing
     if (getline(&line, &len, fp) != -1) {
-        parse_branch_name(line, gs);
-        parse_remote_name(line, gs);
-        parse_ahead_behind(line, gs);
+	      if (is_tag(line)) {
+            //printf("Tag found, line %s", line);
+	          parse_tag_name(line, gs);	
+        } else {
+            //printf("Tag not found, line %s", line);
+            parse_branch_name(line, gs);
+            parse_remote_name(line, gs);
+            parse_ahead_behind(line, gs);
+        }
     }
-
     char filestatus[3];
     // https://git-scm.com/docs/git-status
     while (getline(&line, &len, fp) != -1) {

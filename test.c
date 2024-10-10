@@ -32,6 +32,8 @@ int main(void) {
 
         assert(!strcmp(branches[i], gs->branch_name));
         assert(!strcmp(origins[i], gs->remote_name));
+        assert(aheads[i] == gs->ahead_count);
+        assert(behinds[i] == gs->behind_count);
         free_gitstatus(gs);
         printf("Test %d passed\n", i+1);
     }

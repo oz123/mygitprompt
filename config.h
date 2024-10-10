@@ -30,29 +30,34 @@ void show_prompt(GitStatus *gs) {
     bool dirty = false;
     printf("[");
     printf(FG_GREEN GITICON FG_WHITE);
-    printf("|%s → %s", gs->branch_name, gs->remote_name);
-    if (gs->ahead_count > 0) {
-        printf(" ↑%d", gs->ahead_count);
-    }
-    if (gs->behind_count > 0) {
-        printf("↓%d", gs->behind_count);
-    }
-    if (gs->staged_count > 0) {
-        printf(STAGED ":%d", gs->staged_count);
-        dirty = true;
-    }
-    if (gs->modified_count > 0) {
-         printf(" "UNSTAGED ":%d", gs->modified_count);
-         dirty = true;
-    }
-    if (gs->untracked_count > 0) {
-        printf(" "UNTRACKED ":%d", gs->untracked_count);
-        dirty = true;
-    }
-    if (dirty) {
-       printf(" "FG_RED BOLD GITDIRTY NORMAL FG_WHITE"|");
+    if (gs->tag_name == NULL) {
+        printf("|%s → %s", gs->branch_name, gs->remote_name);
+        if (gs->ahead_count > 0) {
+            printf(" ↑%d", gs->ahead_count);
+        }
+        if (gs->behind_count > 0) {
+            printf("↓%d", gs->behind_count);
+        }
+        if (gs->staged_count > 0) {
+            printf(STAGED ":%d", gs->staged_count);
+            dirty = true;
+        }
+        if (gs->modified_count > 0) {
+             printf(" "UNSTAGED ":%d", gs->modified_count);
+             dirty = true;
+        }
+        if (gs->untracked_count > 0) {
+            printf(" "UNTRACKED ":%d", gs->untracked_count);
+            dirty = true;
+        }
+        if (dirty) {
+           printf(" "FG_RED BOLD GITDIRTY NORMAL FG_WHITE"|");
+        } else {
+           printf(" "GITCLEAN"|");
+        }
     } else {
-       printf(" "GITCLEAN"|");
+        printf("tag:%s", gs->tag_name);
+        printf(" "GITCLEAN"|");
     }
     printf(RESET_COLOR);
     printf("]");
