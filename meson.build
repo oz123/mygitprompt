@@ -11,7 +11,16 @@ sources = ['mygitprompt.c', 'gitstatus.c']
 inc = include_directories('.')
 
 # Define the main executable
-executable('mygitprompt', sources, include_directories: inc, install: true)
+bin = executable('mygitprompt', sources, include_directories: inc, install: true)
 
+# Define the static executable
+static_link_args = ['-static']
+if build_machine.system() != 'darwin'  # macOS doesn't support fully static linking
+    static_bin = executable('mygitprompt-static',
+                           sources,
+                           include_directories: inc,
+                           link_args: static_link_args,
+                           install: true)
+endif
 e = executable('mytest', sources: ['test.c', 'gitstatus.c'])
 test('mygitprompt test', e)
