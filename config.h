@@ -39,7 +39,7 @@ void show_prompt(GitStatus *gs) {
             printf("↓%d", gs->behind_count);
         }
         if (gs->staged_count > 0) {
-            printf(STAGED ":%d", gs->staged_count);
+            printf(" "STAGED ":%d", gs->staged_count);
             dirty = true;
         }
         if (gs->modified_count > 0) {
