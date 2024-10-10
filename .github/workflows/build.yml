@@ -1,4 +1,4 @@
-name: mh CI
+name: mygitprompt test
 
 on:
   push:
