@@ -12,5 +12,7 @@ jobs:
     - uses: actions/checkout@v4
     - name: install deps
       run: sudo apt install -y meson make
+    - name: init
+      run: meson setup builddir -Doptimization=3 -Dwarning_level=3
     - name: test
       run: meson test  -C builddir/ -v
