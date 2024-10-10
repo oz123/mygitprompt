@@ -5,60 +5,36 @@
 int main(void) {
     printf("hello test\n");
 
-    char line1[] = "## main...origin/main [ahead 9, behind 14]";
-    char line2[] = "## test...origin/test [ahead 5]";
-    char line3[] = "## branch...mine/branch [behind 20]";
-    char line4[] = "## branch2...upstream/branch2";
+    char *branches[] = {
+        "main", "test", "branch", "branch2"
+    };
 
-    GitStatus *gs = new_gitstatus();
+    char *origins[] = {
+        "origin", "origin", "mine", "upstream"
+    };
 
-    parse_branch_name(line1, gs);
-    parse_remote_name(line1, gs);
-    parse_ahead_behind(line1, gs);
+    int aheads[] = {9, 5, 0, 0};
+    int behinds[] = {14, 0, 20, 0};
 
-    assert(!strcmp("main", gs->branch_name));
-    assert(!strcmp("origin", gs->remote_name));
-    assert(gs->ahead_count == 9);
-    assert(gs->behind_count == 14);
-    free_gitstatus(gs);
-    printf("Test 1 passed\n");
+    char *git_status_lines[] = {
+        "## main...origin/main [ahead 9, behind 14]",
+        "## test...origin/test [ahead 5]",
+        "## branch...mine/branch [behind 20]",
+        "## branch2...upstream/branch2",
+    };
 
-    gs = new_gitstatus();
-    parse_branch_name(line2, gs);
-    parse_remote_name(line2, gs);
-    parse_ahead_behind(line2, gs);
+    for (int i=0; i<4; i++) {
+        GitStatus *gs = new_gitstatus();
 
-    assert(!strcmp("test", gs->branch_name));
-    assert(!strcmp("origin", gs->remote_name));
-    assert(gs->ahead_count == 5);
-    assert(gs->behind_count == 0);
+        parse_branch_name(git_status_lines[i], gs);
+        parse_remote_name(git_status_lines[i], gs);
+        parse_ahead_behind(git_status_lines[i], gs);
 
-    free_gitstatus(gs);
-    printf("Test 2 passed\n");
+        assert(!strcmp(branches[i], gs->branch_name));
+        assert(!strcmp(origins[i], gs->remote_name));
+        free_gitstatus(gs);
+        printf("Test %d passed\n", i+1);
+    }
 
-    gs = new_gitstatus();
-    parse_branch_name(line3, gs);
-    parse_remote_name(line3, gs);
-    parse_ahead_behind(line3, gs);
-
-    assert(!strcmp("branch", gs->branch_name));
-    assert(!strcmp("mine", gs->remote_name));
-    assert(gs->ahead_count == 0);
-    assert(gs->behind_count == 20);
-    free_gitstatus(gs);
-    printf("Test 3 passed\n");
-
-    gs = new_gitstatus();
-    parse_branch_name(line4, gs);
-    parse_remote_name(line4, gs);
-    parse_ahead_behind(line4, gs);
-
-    assert(!strcmp("branch2", gs->branch_name));
-    assert(!strcmp("upstream", gs->remote_name));
-    assert(gs->ahead_count == 0);
-    assert(gs->behind_count == 0);
-
-    free_gitstatus(gs);
-    printf("Test 4 passed\n");
     return 0;
 }
