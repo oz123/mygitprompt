@@ -11,7 +11,7 @@
 
 #define BOLD SOH ESC "[1m"STX
 
-#define RESET_COLOR ESC "[0m"STX
+#define RESET_COLOR SOH ESC "[0m"STX
 #define NORMAL SOH ESC "[0m"STX
 
 #define FG_RED SOH ESC "[31m"STX
