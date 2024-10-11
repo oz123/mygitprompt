@@ -3,6 +3,19 @@ My git prompt
 
 Yet another git prompt, written in C for speed and simplicity.
 
+Usage:
+------
+
+Download the binary from the release page or compile on your own.
+Run:
+
+$ install -m 755 mygitprompt-static-linux-amd64 usr/local/bin/mygitprompt 
+
+Add it to your PS1 in `.bashrc`, for example in Debian based systems:
+```
+PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] $(/usr/local/bin/mygitprompt)\$ '
+```
+
 Dependencies:
 -------------
  * C compiler
