@@ -1,9 +1,7 @@
 My git prompt
 =============
 
-Yet another git prompt with emphasis on BASH (which is my default shell).
-
-A project to learn a bit more about C.
+Yet another git prompt, written in C for speed and simplicity.
 
 Dependencies:
 -------------

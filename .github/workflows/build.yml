@@ -15,4 +15,4 @@ jobs:
     - name: init
       run: meson setup builddir -Doptimization=3 -Dwarning_level=3
     - name: test
-      run: meson test  -C builddir/ -v
+      run: meson test -C builddir/ -v

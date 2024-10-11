@@ -1,0 +1,49 @@
+name: release
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+permissions:  # Set permissions for the GITHUB_TOKEN
+  contents: write  # Grant write permission to contents
+  packages: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: install deps
+      run: sudo apt install -y meson make
+    - name: build static binary
+      run: make init build-static
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: static-linux-x86_64
+        path: builddir/mygitprompt-static-linux-amd64
+  create-release:
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+    - name: Create Release
+      id: create_release
+      uses: softprops/action-gh-release@v2
+      with:
+        body: "Release notes or description"
+        draft: false
+        prerelease: false
+        make_latest: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Download artifacts
+      uses: actions/download-artifact@v4
+      with:
+        path: ./artifacts
+    - name: list
+      run: ls -ll artifacts/static-linux-x86_64
+    - name: upload build artifact to release
+      uses: softprops/action-gh-release@v2
+      with:
+        files: |
+          artifacts/static-linux-x86_64/*
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
