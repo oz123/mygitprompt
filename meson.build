@@ -16,7 +16,7 @@ bin = executable('mygitprompt', sources, include_directories: inc, install: true
 # Define the static executable
 static_link_args = ['-static']
 if build_machine.system() != 'darwin'  # macOS doesn't support fully static linking
-    static_bin = executable('mygitprompt-static',
+    static_bin = executable('mygitprompt-static-linux-amd64',
                            sources,
                            include_directories: inc,
                            link_args: static_link_args,

@@ -16,6 +16,9 @@ WORKDIR = $(shell pwd)/builddir
 build: ## build the program
 	meson compile -C $(WORKDIR)
 
+build-static: ## build a statically linked binary
+	meson compile -C $(WORKDIR) mygitprompt-static-linux-amd64
+
 install:  ## install the binary
 	meson install -C $(WORKDIR)
 
