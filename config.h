@@ -25,7 +25,6 @@ void show_prompt(GitStatus *gs){
 }
 */
 
-// TODO: Handle tags
 void show_prompt(GitStatus *gs) {
     bool dirty = false;
     printf("[");
