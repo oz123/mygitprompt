@@ -7,10 +7,15 @@ Usage:
 ------
 
 Download the binary from the release page or compile on your own.
+```
+latest_version=$(curl --silent "https://api.github.com/repos/oz123/mygitprompt/releases/latest" | grep '"tag_name"' | sed -E 's/.*"([^"]+)".*/\1/')'])"')
+wget https://github.com/oz123/mygitprompt/releases/download/${latest_version}/mygitprompt-static-linux-amd64
+```
+
 Run:
-
+```
 $ install -m 755 mygitprompt-static-linux-amd64 usr/local/bin/mygitprompt 
-
+```
 Add it to your PS1 in `.bashrc`, for example in Debian based systems:
 ```
 PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] $(/usr/local/bin/mygitprompt)\$ '
