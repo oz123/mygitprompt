@@ -14,7 +14,7 @@ BIN = mygitprompt
 WORKDIR = $(shell pwd)/builddir
 
 build: ## build the program
-	meson compile -C $(WORKDIR) mygitprompt
+	meson compile -v -C $(WORKDIR) mygitprompt
 
 build-static: ## build a statically linked binary
 	meson compile -C $(WORKDIR) mygitprompt-static-linux-amd64

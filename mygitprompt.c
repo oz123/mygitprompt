@@ -24,6 +24,8 @@
 #include "gitstatus.h"
 #include "config.h"
 
+//#define VERSION "v0.0.2-4-g14da1ce-dirty"
+
 int main(int argc, char *argv[]){
     FILE *fp;
     char *line = NULL;
@@ -33,12 +35,24 @@ int main(int argc, char *argv[]){
 
     if (argc > 1) {
         cmd = argv[1];
-    if (!strcmp(cmd, "version")){
+        if (!strcmp(cmd, "--help")){
+            printf("Usage: mygitprompt [--help|version]\n\n");
+            printf("Show current git status in a form useful for usage with your shell prompt.\n\n");
+            printf("If no arguments are given, mygitprompt will show the current git status.\n\n");
+            printf("Options:\n");
+            printf("  --help    Show this help message\n");
+            printf("  --version Show the version of mygitprompt\n\n");
+            printf("mygitprompt is a free software distributed under the tersm of GPLv3\n");
+            return 0;
+        }
+        if (!strcmp(cmd, "--version")){
             printf("mygitprompt version %s\n", VERSION);
+            printf("mygitprompt is a free software distributed under the tersm of GPLv3\n");
+            return 0;
         } else {
             printf("Unknown command ...\n");
             return 1;
-	      }
+        }
     }
     fp = popen("git status --porcelain=v1 --branch 2>&1", "r");
     if (fp == NULL) {
@@ -54,11 +68,9 @@ int main(int argc, char *argv[]){
     }
     // first line has always the branch name and ahead behing
     if (getline(&line, &len, fp) != -1) {
-	      if (is_tag(line)) {
-            //printf("Tag found, line %s", line);
-	          parse_tag_name(line, gs);	
+        if (is_tag(line)) {
+            parse_tag_name(line, gs);
         } else {
-            //printf("Tag not found, line %s", line);
             parse_branch_name(line, gs);
             parse_remote_name(line, gs);
             parse_ahead_behind(line, gs);
