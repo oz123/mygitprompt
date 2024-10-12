@@ -14,13 +14,16 @@ BIN = mygitprompt
 WORKDIR = $(shell pwd)/builddir
 
 build: ## build the program
-	meson compile -C $(WORKDIR)
+	meson compile -C $(WORKDIR) mygitprompt
 
 build-static: ## build a statically linked binary
 	meson compile -C $(WORKDIR) mygitprompt-static-linux-amd64
 
 install:  ## install the binary
-	meson install -C $(WORKDIR)
+	meson install -C $(WORKDIR) --tags runtime
+
+install-static:  ## install the binary
+	meson install -C $(WORKDIR) --tags static
 
 init: ## init meson build dir
 	meson setup $(WORKDIR) -Doptimization=3 -Dwarning_level=3
