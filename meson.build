@@ -5,10 +5,10 @@ project('mygitprompt', 'c',
 add_project_arguments(['-DVERSION="' + meson.project_version() +'"'] , language: 'c')
 
 # Define the source files
-sources = ['mygitprompt.c', 'gitstatus.c']
+sources = ['src/mygitprompt.c', 'src/gitstatus.c']
 
 # Define the include directories
-inc = include_directories('.')
+inc = include_directories('src')
 
 # Define the main executable
 bin = executable('mygitprompt',
@@ -28,6 +28,6 @@ if build_machine.system() != 'darwin'  # macOS doesn't support fully static link
 endif
 
 # Define test executable
-test_executable = executable('mygitprompt-test', sources: ['test.c', 'gitstatus.c'])
+test_executable = executable('mygitprompt-test', sources: ['src/test.c', 'src/gitstatus.c'])
 test('mygitprompt test', test_executable)
 

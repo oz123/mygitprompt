@@ -38,7 +38,7 @@ run:  ## run the compiled program
 	$(WORKDIR)/$(BIN)
 
 build-test:  ## build the test binary
-	gcc -g -o builddir/test.exe test.c gitstatus.c -I.
+	gcc -g -o builddir/test.exe src/test.c src/gitstatus.c -I.
 
 test: build-test ## run the test binary
 	MALLOC_PERTURB_=12 ./builddir/test.exe
