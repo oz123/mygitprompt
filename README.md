@@ -16,6 +16,16 @@ Add it to your PS1 in `.bashrc`, for example in Debian based systems:
 PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] $(/usr/local/bin/mygitprompt)\$ '
 ```
 
+Configuration:
+--------------
+
+In the spirit of [suckless](suckless.org), configuration is done by editing
+the source code.
+You don't need to master C to do this. Check `colors.h` and `config.h`.
+The later contains a function `show_prompt(GitStatus *sh)` which you can
+modify for your own taste.
+Some colors are defined in `colors.h` you can add more there.
+
 Dependencies:
 -------------
  * C compiler
