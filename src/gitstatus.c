@@ -118,14 +118,16 @@ void parse_ahead_behind(char *line, GitStatus *gs) {
 void parse_branch_name(char *line, GitStatus *gs) {
     char *p;
     char *dotp;
-    int len;
+    int len = 0;
     // Skip the first two characters (## and a space)
     p = line + 3;
 
     // Find the first 3 dots in the string
     dotp = strstr(p, "...");
 
-    // If a dot was found
+    // If a 3 dots were found
+    // git status --branch --porcelain v1
+    // ## main...origin/main
     if (dotp) {
         // Calculate the length of the substring before the first dot
         len = dotp - p;
@@ -139,6 +141,23 @@ void parse_branch_name(char *line, GitStatus *gs) {
 
         // Copy the substring to the branch string
         strncpy(gs->branch_name, p, len);
+
+        // Ensure the branch string is null-terminated
+        gs->branch_name[len] = '\0';
+    } else {
+        // if branch is not pushed yet
+        // git checkout -b foo
+        // git status --porcelain --branch
+        // ## foo
+	len = strlen(p);
+        gs->branch_name = (char *)malloc(len + 1);
+        if (gs->branch_name == NULL) {
+            printf("Memory allocation failed\n");
+            return;
+        }
+
+        // Copy the substring to the branch string
+        strncpy(gs->branch_name, p, len-1);
 
         // Ensure the branch string is null-terminated
         gs->branch_name[len] = '\0';

@@ -48,7 +48,10 @@ void show_prompt(GitStatus *gs) {
     printf("[");
     printf(FG_GREEN GITICON FG_WHITE);
     if (gs->tag_name == NULL) {
-        printf("|%s → %s", gs->branch_name, gs->remote_name);
+        printf("|%s", gs->branch_name);
+        if (gs->remote_name != NULL) {
+            printf(" → %s", gs->remote_name);
+        }
         if (gs->ahead_count > 0) {
             printf(" ↑%d", gs->ahead_count);
         }
