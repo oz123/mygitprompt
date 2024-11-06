@@ -43,12 +43,18 @@ void show_prompt(GitStatus *gs){
 }
 */
 
+# define MAX_BRANCH_LEN 12
+
 void show_prompt(GitStatus *gs) {
     bool dirty = false;
     printf("[");
     printf(FG_GREEN GITICON FG_WHITE);
     if (gs->tag_name == NULL) {
-        printf("|%s", gs->branch_name);
+	if (strlen((gs->branch_name)) > MAX_BRANCH_LEN){
+            printf("%.*s...", MAX_BRANCH_LEN, gs->branch_name); // Print first MAX_BRANCH_LEN characters
+	} else {
+            printf("|%s", gs->branch_name);
+	}
         if (gs->remote_name != NULL) {
             printf(" → %s", gs->remote_name);
         }
